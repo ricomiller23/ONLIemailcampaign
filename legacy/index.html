@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONLI | Marketing Email Campaign</title>
+    <meta name="description" content="ONLI marketing email campaign manager — outreach pipeline dashboard">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-panel: #141414;
+            --bg-card: #1c1c1c;
+            --onli-blue: #00b4ff;
+            --onli-glow: rgba(0, 180, 255, 0.35);
+            --onli-dark: #002d40;
+            --onli-teal: #00e5c3;
+            --onli-teal-glow: rgba(0, 229, 195, 0.25);
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --border: #2a2a2a;
+            --sent-green: #39ff14;
+            --sent-green-glow: rgba(57, 255, 20, 0.3);
+            --error-red: #ff3355;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ── Sidebar ────────────────────────────────────────── */
+        .sidebar {
+            width: 80px;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 28px;
+        }
+
+        .logo {
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--onli-blue);
+            text-shadow: 0 0 12px var(--onli-glow);
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            background-color: var(--onli-dark);
+            color: var(--onli-blue);
+            box-shadow: inset 0 0 0 1px var(--onli-blue);
+        }
+
+        .nav-item:hover:not(.active) {
+            color: var(--text-main);
+        }
+
+        /* ── Main Content ───────────────────────────────────── */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 30px;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .header-title h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, var(--onli-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 6px;
+            background-color: var(--bg-panel);
+            padding: 5px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 7px 14px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add Contact Button */
+        .btn-add {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            background: rgba(0, 180, 255, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            color: var(--onli-blue);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            background: rgba(0, 180, 255, 0.18);
+            box-shadow: 0 0 12px var(--onli-glow);
+        }
+
+        /* ── Metrics ────────────────────────────────────────── */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .metric-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background-color: var(--onli-blue);
+            opacity: 0.7;
+        }
+
+        .metric-card:nth-child(2)::before { background-color: var(--onli-teal); }
+        .metric-card:nth-child(3)::before { background-color: #e5bf00; }
+        .metric-card:nth-child(4)::before { background-color: var(--sent-green); }
+
+        .metric-val {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Kanban ─────────────────────────────────────────── */
+        .kanban-board {
+            display: flex;
+            gap: 18px;
+            flex: 1;
+            overflow-x: auto;
+            padding-bottom: 16px;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 260px;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .column-header {
+            padding: 13px 15px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .col-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .col-count {
+            background-color: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .column-body {
+            padding: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .column-body::-webkit-scrollbar { width: 4px; }
+        .column-body::-webkit-scrollbar-track { background: transparent; }
+        .column-body::-webkit-scrollbar-thumb { background: rgba(0,180,255,0.3); border-radius: 2px; }
+
+        /* ── Lead Card ──────────────────────────────────────── */
+        .lead-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .lead-card:hover {
+            border-color: var(--onli-blue);
+            box-shadow: 0 0 12px rgba(0, 180, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .lead-card.sent {
+            border-color: rgba(57, 255, 20, 0.3);
+        }
+
+        .lead-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            font-size: 9px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-new { background: rgba(0, 180, 255, 0.12); color: var(--onli-blue); }
+        .badge-warm { background: rgba(229, 191, 0, 0.12); color: #e5bf00; }
+        .badge-hot { background: rgba(255, 51, 85, 0.12); color: #ff3355; }
+        .badge-sent { background: rgba(57, 255, 20, 0.1); color: var(--sent-green); }
+
+        .lead-name { font-weight: 600; font-size: 14px; margin-bottom: 5px; padding-right: 48px; }
+        .lead-company {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lead-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 9px;
+            margin-top: 2px;
+        }
+
+        .lead-status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--onli-blue);
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .lead-status { font-size: 11px; font-weight: 600; color: var(--onli-blue); display: flex; align-items: center; }
+        .lead-time { font-size: 10px; color: var(--text-muted); }
+
+        /* ── Drawer ─────────────────────────────────────────── */
+        .drawer {
+            width: 420px;
+            background-color: var(--bg-panel);
+            border-left: 1px solid var(--border);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed;
+            right: 0; top: 0;
+            height: 100vh;
+            z-index: 100;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .drawer::-webkit-scrollbar { width: 4px; }
+        .drawer::-webkit-scrollbar-track { background: transparent; }
+        .drawer::-webkit-scrollbar-thumb { background: rgba(0,180,255,0.3); border-radius: 2px; }
+
+        .drawer.open { transform: translateX(0); }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .drawer-close:hover { color: #fff; }
+
+        .drawer-header { margin-bottom: 22px; }
+
+        .drw-tag {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: rgba(0,180,255,0.1);
+            color: var(--onli-blue);
+            letter-spacing: 0.8px;
+        }
+
+        .drw-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .drw-sub { color: var(--text-muted); font-size: 13px; }
+
+        .drw-section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .drw-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .drw-field { font-size: 13px; margin-bottom: 12px; line-height: 1.5; }
+        .drw-field:last-child { margin-bottom: 0; }
+        .drw-email { color: var(--onli-blue); text-decoration: none; }
+        .drw-email:hover { text-decoration: underline; }
+
+        /* ── Campaign Select ────────────────────────────────── */
+        .campaign-select {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            outline: none;
+            font-size: 13px;
+            transition: border-color 0.2s;
+            appearance: none;
+            cursor: pointer;
+        }
+        .campaign-select:focus { border-color: var(--onli-blue); }
+
+        /* ── Buttons ────────────────────────────────────────── */
+        .btn-onli {
+            background: linear-gradient(135deg, var(--onli-blue), var(--onli-teal));
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            flex: 1;
+        }
+
+        .btn-onli:hover {
+            box-shadow: 0 0 18px var(--onli-glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-onli:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary-drawer {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .btn-secondary-drawer:hover { background-color: rgba(255,255,255,0.05); }
+
+        /* ── Draft Area ─────────────────────────────────────── */
+        .draft-container {
+            display: none;
+            flex-direction: column;
+            margin-top: 6px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .draft-toolbar {
+            font-size: 11px;
+            color: var(--onli-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .draft-actions { display: flex; gap: 5px; }
+
+        .btn-copy {
+            background: transparent;
+            border: 1px solid var(--onli-blue);
+            color: var(--onli-blue);
+            padding: 4px 9px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-copy:hover { background: rgba(0,180,255,0.1); }
+
+        .btn-send-mail {
+            background: var(--onli-blue);
+            border: 1px solid var(--onli-blue);
+            color: #000;
+            padding: 4px 9px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .btn-send-mail:hover { box-shadow: 0 0 10px var(--onli-glow); }
+
+        #draft-output {
+            width: 100%;
+            min-height: 240px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: monospace;
+            font-size: 12px;
+            padding: 14px;
+            resize: vertical;
+            outline: none;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            transition: border-color 0.2s;
+        }
+        #draft-output:focus { border-color: var(--onli-blue); }
+
+        /* ── Add Contact Modal ──────────────────────────────── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            border-radius: 14px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px;
+            box-shadow: 0 0 60px rgba(0, 180, 255, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .modal-icon {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--onli-blue), var(--onli-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .modal-title { font-size: 18px; font-weight: 700; }
+
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+        .modal-grid .full { grid-column: 1 / -1; }
+
+        .modal-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 10px 12px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .modal-input:focus { border-color: var(--onli-blue); }
+
+        .modal-select {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 10px 12px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+            appearance: none;
+        }
+        .modal-select:focus { border-color: var(--onli-blue); }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Toast ──────────────────────────────────────────── */
+        .toast {
+            position: fixed;
+            top: 20px; right: 20px;
+            padding: 12px 20px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 300;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+        .toast.success { background: var(--sent-green); color: #000; }
+        .toast.error { background: var(--error-red); color: #fff; }
+        .toast.info { background: var(--onli-blue); color: #000; }
+
+        /* ── Spinner ─────────────────────────────────────────── */
+        .spinner {
+            width: 14px; height: 14px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Status colors ──────────────────────────────────── */
+        .status-pending { color: var(--text-muted); }
+        .status-approached { color: #e5bf00; }
+        .status-negotiating { color: var(--onli-teal); }
+        .status-sent { color: var(--sent-green); }
+
+        .pulse {
+            display: inline-block;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--sent-green);
+            box-shadow: 0 0 0 0 var(--sent-green-glow);
+            animation: pulseAnim 2s infinite;
+        }
+        @keyframes pulseAnim {
+            0% { box-shadow: 0 0 0 0 var(--sent-green-glow); }
+            70% { box-shadow: 0 0 0 8px rgba(57,255,20,0); }
+            100% { box-shadow: 0 0 0 0 rgba(57,255,20,0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">ONLI</div>
+        <div class="nav-item active" title="Campaign Dashboard">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+            </svg>
+        </div>
+        <div class="nav-item" title="Contacts">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+        </div>
+        <div class="nav-item" title="Sent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header-title">
+                <h1>Marketing Email Campaign</h1>
+                <p>ONLI outreach pipeline — manage, draft, and send personalized campaigns.</p>
+            </div>
+            <div class="header-right">
+                <div class="filter-tabs" id="filter-tabs">
+                    <div class="tab active" onclick="setFilter('All')">All</div>
+                    <div class="tab" onclick="setFilter('Pending')">Pending</div>
+                    <div class="tab" onclick="setFilter('Approached')">Approached</div>
+                    <div class="tab" onclick="setFilter('Sent')">Sent</div>
+                </div>
+                <button class="btn-add" onclick="openAddModal()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    Add Contact
+                </button>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-val" id="metric-total">0</div>
+                <div class="metric-label">Total Contacts</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="metric-pending">0</div>
+                <div class="metric-label">Pending Outreach</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="metric-approached">0</div>
+                <div class="metric-label">Approached</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="metric-sent">0</div>
+                <div class="metric-label">Sent / Onboarded</div>
+            </div>
+        </div>
+
+        <!-- Kanban Board -->
+        <div class="kanban-board">
+
+            <!-- Column 1: Pending -->
+            <div class="column">
+                <div class="column-header">
+                    <span class="col-title">Pending</span>
+                    <span class="col-count" id="count-pending">0</span>
+                </div>
+                <div class="column-body" id="body-pending"></div>
+            </div>
+
+            <!-- Column 2: Approached -->
+            <div class="column">
+                <div class="column-header">
+                    <span class="col-title">Approached</span>
+                    <span class="col-count" id="count-approached">0</span>
+                </div>
+                <div class="column-body" id="body-approached"></div>
+            </div>
+
+            <!-- Column 3: In Conversation -->
+            <div class="column">
+                <div class="column-header">
+                    <span class="col-title">In Conversation</span>
+                    <span class="col-count" id="count-conversation">0</span>
+                </div>
+                <div class="column-body" id="body-conversation"></div>
+            </div>
+
+            <!-- Column 4: Sent / Onboarded -->
+            <div class="column">
+                <div class="column-header">
+                    <span class="col-title">Sent / Onboarded</span>
+                    <span class="col-count" id="count-sent">0</span>
+                </div>
+                <div class="column-body" id="body-sent"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Right Detail Drawer -->
+    <div class="drawer" id="drawer">
+        <svg class="drawer-close" onclick="closeDrawer()" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+
+        <div class="drawer-header">
+            <div class="drw-tag" id="drw-tag">ONLI TARGET</div>
+            <div class="drw-title" id="drw-name">–</div>
+            <div class="drw-sub" id="drw-comp">–</div>
+        </div>
+
+        <div class="drw-section">
+            <div class="drw-label">Contact Information</div>
+            <div class="drw-field">
+                <svg style="margin-right:8px;vertical-align:middle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <a href="#" class="drw-email" id="drw-email">–</a>
+            </div>
+            <div class="drw-field" id="drw-title-row" style="color:var(--text-muted)">
+                <svg style="margin-right:8px;vertical-align:middle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                </svg>
+                <span id="drw-title">–</span>
+            </div>
+        </div>
+
+        <div class="drw-section">
+            <div class="drw-label">Notes / Context</div>
+            <p id="drw-notes" style="font-size:13px;color:#ccc;line-height:1.6;">No notes yet.</p>
+        </div>
+
+        <div class="drw-section">
+            <div class="drw-label">Campaign Template</div>
+            <select class="campaign-select" id="campaign-selector">
+                <option value="onli_intro">ONLI — Introduction & Value Prop</option>
+                <option value="onli_followup">ONLI — Follow-Up (Warm)</option>
+                <option value="onli_partnership">ONLI — Partnership Proposal</option>
+                <option value="onli_demo">ONLI — Demo Request</option>
+            </select>
+            <div style="display:flex;gap:10px;">
+                <button class="btn-onli" id="btn-draft" onclick="loadDraft()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    Load Draft
+                </button>
+                <button class="btn-secondary-drawer" onclick="markApproached()">Mark Approached</button>
+            </div>
+        </div>
+
+        <div class="draft-container" id="draft-container">
+            <div class="draft-toolbar">
+                <span>Campaign Draft</span>
+                <div class="draft-actions">
+                    <button class="btn-copy" onclick="copyDraft()">COPY TEXT</button>
+                    <button class="btn-send-mail" onclick="sendMailTo()">SEND (MAIL APP)</button>
+                </div>
+            </div>
+            <textarea id="draft-output"></textarea>
+        </div>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div class="modal-overlay" id="add-modal" style="display:none;" onclick="closeModalOutside(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-icon">✉</div>
+                <div class="modal-title">Add Outreach Contact</div>
+            </div>
+            <div class="modal-grid">
+                <div>
+                    <label class="modal-label">First Name</label>
+                    <input id="inp-fname" type="text" class="modal-input" placeholder="e.g. Jane">
+                </div>
+                <div>
+                    <label class="modal-label">Last Name</label>
+                    <input id="inp-lname" type="text" class="modal-input" placeholder="e.g. Smith">
+                </div>
+                <div>
+                    <label class="modal-label">Company</label>
+                    <input id="inp-company" type="text" class="modal-input" placeholder="e.g. Acme Corp">
+                </div>
+                <div>
+                    <label class="modal-label">Title</label>
+                    <input id="inp-title" type="text" class="modal-input" placeholder="e.g. VP of Marketing">
+                </div>
+                <div class="full">
+                    <label class="modal-label">Email Address</label>
+                    <input id="inp-email" type="email" class="modal-input" placeholder="e.g. jane@acmecorp.com">
+                </div>
+                <div class="full">
+                    <label class="modal-label">Notes / Context</label>
+                    <textarea id="inp-notes" class="modal-input" rows="2" style="resize:vertical" placeholder="Why are they a good fit for ONLI?"></textarea>
+                </div>
+                <div class="full">
+                    <label class="modal-label">Status</label>
+                    <select id="inp-status" class="modal-select">
+                        <option value="pending">Pending</option>
+                        <option value="approached">Approached</option>
+                        <option value="conversation">In Conversation</option>
+                        <option value="sent">Sent / Onboarded</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-onli" onclick="saveContact()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                    Add Contact
+                </button>
+                <button class="btn-secondary-drawer" onclick="closeAddModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ── State ───────────────────────────────────────────────────────
+        let CONTACTS = [];
+        let currentIdx = -1;
+        let currentFilter = 'All';
+
+        const STORAGE_KEY = 'onli-campaign-contacts';
+
+        // ── Campaign Templates ──────────────────────────────────────────
+        const TEMPLATES = {
+            onli_intro: {
+                subject: "ONLI — Unlocking a New Channel for {company}",
+                body: `Hi {first_name},
+
+I wanted to reach out because I think ONLI could be a strong fit for {company}.
+
+ONLI is a next-generation marketing platform built to help companies like yours reach high-intent audiences more efficiently — with AI-personalized outreach, real-time analytics, and seamless campaign management all in one place.
+
+We're seeing tremendous results for our early partners: on average, 3× more responses than traditional cold outreach and a 40% reduction in cost per acquisition.
+
+Would it make sense to set aside 15 minutes this week to see if there's a fit?
+
+Looking forward to connecting,
+[Your Name]
+ONLI | [your@email.com]`
+            },
+            onli_followup: {
+                subject: "Circling back — ONLI x {company}",
+                body: `Hi {first_name},
+
+Just circling back on my note from earlier.
+
+I know inboxes get full, so I'll be brief: ONLI helps teams like {company} run smarter outreach campaigns with significantly less overhead. We handle the personalization, timing, and analytics — you handle the relationships.
+
+If you're evaluating your marketing stack at any point this quarter, I'd love to be on your radar. Happy to send over a quick overview if that's helpful.
+
+Best,
+[Your Name]
+ONLI | [your@email.com]`
+            },
+            onli_partnership: {
+                subject: "Partnership Opportunity — ONLI + {company}",
+                body: `Hi {first_name},
+
+I've been following {company}'s work closely and I think there's a compelling partnership opportunity between ONLI and your team.
+
+ONLI specializes in AI-driven marketing automation for growth-stage companies. Our platform has helped partners generate measurable pipeline growth in as little as 30 days. Given {company}'s market position, I can see real synergy — whether that's co-marketing, a referral arrangement, or a deeper integration.
+
+Would you be open to a quick call to explore what this could look like?
+
+Best,
+[Your Name]
+ONLI | [your@email.com]`
+            },
+            onli_demo: {
+                subject: "Quick demo — see ONLI in action ({company})",
+                body: `Hi {first_name},
+
+I'd love to show you what ONLI can do for {company} in a quick 20-minute live demo.
+
+You'll see:
+  • How we personalize outreach at scale using AI
+  • Our real-time campaign analytics dashboard  
+  • How teams like yours go live in under 48 hours
+
+No pitch, no pressure — just a look at the product so you can decide if it makes sense.
+
+Do you have 20 minutes this week or next?
+
+Best,
+[Your Name]
+ONLI | [your@email.com]`
+            }
+        };
+
+        // ── Persistence ─────────────────────────────────────────────────
+        function saveToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(CONTACTS));
+        }
+
+        function loadFromStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        CONTACTS = parsed;
+                        return true;
+                    }
+                }
+            } catch(e) {}
+            return false;
+        }
+
+        // ── Default Seed Contacts ───────────────────────────────────────
+                function loadDefaultContacts() {
+            CONTACTS = [
+                {
+                        "id": "azba-1",
+                        "fname": "Adam",
+                        "lname": "Christensen",
+                        "company": "Bell Bank",
+                        "title": "SVP, Commercial Banking Director",
+                        "email": "achristensen@bell.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-2",
+                        "fname": "Bernadette",
+                        "lname": "Hirsch",
+                        "company": "KS State Bank",
+                        "title": "SVP, Commercial Lending",
+                        "email": "bhirsch@ksstate.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-3",
+                        "fname": "John",
+                        "lname": "Fetherston",
+                        "company": "JPMorgan Chase",
+                        "title": "VP, State & Local Government Relations",
+                        "email": "john.fetherston@jpmchase.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-4",
+                        "fname": "Mary",
+                        "lname": "Noor",
+                        "company": "Bank of America",
+                        "title": "Phoenix Market Executive",
+                        "email": "mary.noor@bofa.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-5",
+                        "fname": "Michael",
+                        "lname": "Theile",
+                        "company": "First Fidelity Bank",
+                        "title": "EVP, AZ Commercial Lending",
+                        "email": "mtheile@ffb.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-6",
+                        "fname": "Brent",
+                        "lname": "Cannon",
+                        "company": "National Bank of Arizona",
+                        "title": "President",
+                        "email": "Brent.Cannon@nbarizona.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-7",
+                        "fname": "Daniel",
+                        "lname": "Del Monaco",
+                        "company": "Foothills Bank",
+                        "title": "Chief Banking Officer",
+                        "email": "Dan.DelMonaco@foothillsbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-8",
+                        "fname": "Harlan",
+                        "lname": "Levy",
+                        "company": "Wells Fargo",
+                        "title": "SVP, Government Relations",
+                        "email": "harlan.levy@wellsfargo.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-9",
+                        "fname": "Humphrey",
+                        "lname": "Shin",
+                        "company": "FirstBank",
+                        "title": "Market President",
+                        "email": "Humphrey.Shin@efirstbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-10",
+                        "fname": "Jim",
+                        "lname": "Marlerba",
+                        "company": "Integro Bank",
+                        "title": "Acting CEO",
+                        "email": "james.malerba@integro.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-11",
+                        "fname": "Andy",
+                        "lname": "Gordon",
+                        "company": "Clearinghouse CDFI",
+                        "title": "AZ Market President",
+                        "email": "andyg@ccdfi.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-12",
+                        "fname": "Brian",
+                        "lname": "Crisp",
+                        "company": "Enterprise Bank & Trust",
+                        "title": "President, AZ Region",
+                        "email": "bcrisp@enterprisebank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-13",
+                        "fname": "Chris",
+                        "lname": "Wheeler",
+                        "company": "Goldwater Bank",
+                        "title": "SVP, Commercial Banking",
+                        "email": "cwheeler@goldwaterbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-14",
+                        "fname": "David",
+                        "lname": "Bernard",
+                        "company": "Western Alliance Bank",
+                        "title": "Sr. Managing Director",
+                        "email": "dbernard@westernalliancebank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-15",
+                        "fname": "Pete",
+                        "lname": "Tees",
+                        "company": "Southwest Heritage Bank",
+                        "title": "EVP & Chief Credit Officer",
+                        "email": "ptees@swhb.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-16",
+                        "fname": "Sergio",
+                        "lname": "Cardenas",
+                        "company": "BOK Financial",
+                        "title": "SVP, Market Manager",
+                        "email": "sergio.cardenas@bokf.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "cannabis-co-16",
+                        "fname": "Karson",
+                        "lname": "Humiston",
+                        "company": "Vangst",
+                        "title": "",
+                        "email": "karson.humiston@vangst.com",
+                        "notes": "Cannabis industry company. Ph: Schedule a call at www.vangst.com/schedule-a-call",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-17",
+                        "fname": "Ryan",
+                        "lname": "Rosenfeld",
+                        "company": "GreenForce (acquired by Vangst)",
+                        "title": "",
+                        "email": "ryan.rosenfeld@vangst.com",
+                        "notes": "Cannabis industry company. Ph: Contact Vangst at www.vangst.com/schedule-a-call",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-18",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "CannaVape Supplies (Phoenix Vape Supply)",
+                        "title": "",
+                        "email": "phoenixvapesupply@gmail.com",
+                        "notes": "Cannabis industry company. Ph: (602) 682-7830 Addr: 626 W Indian School Rd, Phoenix, AZ 85013",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-19",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Supurb",
+                        "title": "",
+                        "email": "hello@gryphondigitalmining.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone number, contact via website form Addr: 1180 N. Town Center Drive, Suite 100, Las Vegas, NV 89144",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-20",
+                        "fname": "Michael",
+                        "lname": "Beedles",
+                        "company": "DataOwl",
+                        "title": "",
+                        "email": "info@alleaves.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone number, contact via form",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-21",
+                        "fname": "Michael",
+                        "lname": "Beedles",
+                        "company": "MJ Freeway (Akerna)",
+                        "title": "",
+                        "email": "info@alleaves.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone, contact via form",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-22",
+                        "fname": "Artie",
+                        "lname": "Minson",
+                        "company": "LeafLink",
+                        "title": "",
+                        "email": "info@damafinancial.com",
+                        "notes": "Cannabis industry company. Ph: 877-401-3262",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-23",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Cova Software",
+                        "title": "",
+                        "email": "support@covasoftware.com",
+                        "notes": "Cannabis industry company. Ph: 1.844.667.2682",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-24",
+                        "fname": "Tabitha",
+                        "lname": "Hauer",
+                        "company": "Desert Valley Testing",
+                        "title": "",
+                        "email": "info@desertvalleytesting.com",
+                        "notes": "Cannabis industry company. Ph: (480) 788-6644 Addr: 51 W Weldon Ave, Phoenix, AZ 85013",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-25",
+                        "fname": "Cory",
+                        "lname": "Waggoner",
+                        "company": "Cannabis Consulting Group (Higher Yields Cannabis Consulting)",
+                        "title": "",
+                        "email": "info@higheryieldsconsulting.com",
+                        "notes": "Cannabis industry company. Ph: (844) 449-4353 Addr: 2590 Walnut St., Denver, CO 80205",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-26",
+                        "fname": "Jennifer",
+                        "lname": "and Gordon Ogden",
+                        "company": "Plant.Body.Soul.",
+                        "title": "",
+                        "email": "HELLO@PLANTBODYSOUL.COM",
+                        "notes": "Cannabis industry company. Ph: 855.768.5420 Addr: 335 East Palm Lane, Phoenix, AZ 85004",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-27",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Kiterocket",
+                        "title": "",
+                        "email": "hellophx@kiterocket.com",
+                        "notes": "Cannabis industry company. Ph: +1 602-443-0030",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-28",
+                        "fname": "Nick",
+                        "lname": "Kovacevich",
+                        "company": "Kush Bottles (KushCo Holdings)",
+                        "title": "",
+                        "email": "customerservice@kushsupplyco.com",
+                        "notes": "Cannabis industry company. Ph: (888) 920-5874",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-29",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Green Rush Packaging",
+                        "title": "",
+                        "email": "sales@greenrushpackaging.com",
+                        "notes": "Cannabis industry company. Ph: (866) 477-7225",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-30",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "420 Packaging",
+                        "title": "",
+                        "email": "customerservice@420packaging.com",
+                        "notes": "Cannabis industry company. Ph: 775-376-1945",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-31",
+                        "fname": "Gordon",
+                        "lname": "Ogden",
+                        "company": "Plant.Body.Soul.",
+                        "title": "",
+                        "email": "HELLO@PLANTBODYSOUL.COM",
+                        "notes": "Cannabis industry company. Ph: 855-768-5420 Addr: 335 East Palm Lane, Phoenix, AZ 85004",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-32",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Green Mile Logistics",
+                        "title": "",
+                        "email": "sales@greenmilelogistics.com",
+                        "notes": "Cannabis industry company.",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-33",
+                        "fname": "Brittany",
+                        "lname": "Le",
+                        "company": "Canna Security America",
+                        "title": "",
+                        "email": "info@cannasecurityamerica.com",
+                        "notes": "Cannabis industry company. Ph: (720) 900-0000",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-34",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "PayQwick",
+                        "title": "",
+                        "email": "customersupport@payqwick.com",
+                        "notes": "Cannabis industry company. Ph: 1-888-729-7942",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-35",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Cannasure Insurance",
+                        "title": "",
+                        "email": "info@cannasure.com",
+                        "notes": "Cannabis industry company. Ph: (800) 420-5757 Addr: 1468 W. 9th St., Ste. 805, Cleveland, OH 44113",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "matrix-36",
+                        "fname": "L.",
+                        "lname": "Philipp Wall",
+                        "company": "The Green Leef",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 6617 E. Cactus Wren Road, PARADISE VLY, AZ, 85253, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-37",
+                        "fname": "NICHOLAS",
+                        "lname": "VITA",
+                        "company": "SWC Prescott",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 MA. Address: 321 Billerica Road, Suite 204, CHELMSFORD, MA, 01824, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-38",
+                        "fname": "EIVAN",
+                        "lname": "SHAHARA",
+                        "company": "The Mint Dispensary",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4245 W THOMAS RD #100, PHOENIX, AZ, 85019, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-39",
+                        "fname": "REVAN",
+                        "lname": "SHAHARA",
+                        "company": "4245 Investments Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4245 W THOMAS RD #100, PHOENIX, AZ, 85019, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-40",
+                        "fname": "MOHIT",
+                        "lname": "ASNANI",
+                        "company": "D2 Dispensary",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 221 E 6TH ST. SUITE 105, TUCSON, AZ, 85705, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-41",
+                        "fname": "CHARLES",
+                        "lname": "BOYDEN",
+                        "company": "46 Wellness Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AA. Address: 221 E 6TH ST. SUITE 105, TUCSON, AA, 85705, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-42",
+                        "fname": "Jeremy",
+                        "lname": "Basha",
+                        "company": "480 License Holdings, LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2055 E. 5th St., Suite 201, TEMPE, AZ, 85281, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-43",
+                        "fname": "CYNTHIA",
+                        "lname": "SAY",
+                        "company": "Health For Life Cave Creek",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 21035 NORTH CAVE CREEK ROAD, SUITES C-3 AND C-4, PHOENIX, AZ, 85024, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-44",
+                        "fname": "RICHARD",
+                        "lname": "PROUD",
+                        "company": "Abaca Inc.",
+                        "title": "President/CEO",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 21035 NORTH CAVE CREEK ROAD, SUITES C-3 AND C-4, PHOENIX, AZ, 85024, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-45",
+                        "fname": "RICHARD",
+                        "lname": "PROUD",
+                        "company": "21035 N Cave Creek Rd Ste 3 & 4, Phoenix, AZ 85024",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 . Address: . No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-46",
+                        "fname": "Kimberly",
+                        "lname": "Rivers",
+                        "company": "Trulieve of Tatum",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., TALLAHASSEE, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-47",
+                        "fname": "Raymond",
+                        "lname": "Eric Powers",
+                        "company": "Abedon Saiz Llc",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., TALLAHASSEE, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-48",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "Absolute Health Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-49",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "Absolute Health Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-50",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "175 S Hamilton Pl Bldg 4 Ste 110, Gilbert, AZ 85233",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-51",
+                        "fname": "THANH",
+                        "lname": "PHAM",
+                        "company": "AGI Management LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 540 N Jasmine Way, LITCHFIELD PARK, AZ, 85340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-52",
+                        "fname": "THANH",
+                        "lname": "PHAM",
+                        "company": "All Greens Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 540 JASMINE WAY, LITCHFIELD PARK, AZ, 85340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-53",
+                        "fname": "MYNGA",
+                        "lname": "TRAN",
+                        "company": "10032 W Bell Rd Ste 100, Sun City, AZ 85351",
+                        "title": "Officer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 902 W HARWELL RD, PHOENIX, AZ, 85041, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-54",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "All Rebel Rockers Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave, Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-55",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "All Rebel Rockers Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-56",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "4730 S 48th St, Phoenix, AZ 85040",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-57",
+                        "fname": "John",
+                        "lname": "Campbell",
+                        "company": "Apache County Dispensary LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 ID. Address: PO Box 4944, KETCHUM, ID, 83340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-58",
+                        "fname": "Ian",
+                        "lname": "Lev - Sole Manager",
+                        "company": "Apollo Labs",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1846 E Innovation Park Dr. STE 100, ORO VALLEY, AZ, 85755, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-59",
+                        "fname": "Genalyn",
+                        "lname": "Duka",
+                        "company": "Arizona Cannabis Society Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 15889 W. Westview Dr, GOODYEAR, AZ, 85395, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-60",
+                        "fname": "PRADIP",
+                        "lname": "PATEL",
+                        "company": "Arizona Golden Leaf Wellness, Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 9780 N CAMINO DEL PLATA, TUCSON, AZ, 85742, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-61",
+                        "fname": "Edwin",
+                        "lname": "Gomez",
+                        "company": "Nature's Medicines",
+                        "title": "Secretary",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-62",
+                        "fname": "Jigarkumar",
+                        "lname": "Patel",
+                        "company": "Arizona Natural Pain Solutions I",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-63",
+                        "fname": "EDMOND",
+                        "lname": "VARTUGHIAN",
+                        "company": "Arizona Natures Wellness",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-64",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "Arizona Natures Wellness",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-65",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "465 Jordan Rd, Sedona, AZ 86336",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-66",
+                        "fname": "MARK",
+                        "lname": "MYER",
+                        "company": "Arizona Organix",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5301 W. GLENDALE AVE., GLENDALE, AZ, 85301, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-67",
+                        "fname": "WILLIAM",
+                        "lname": "BENJAMIN MYER",
+                        "company": "5303 W Glendale Ave, Glendale, AZ 85301",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2 W. NORTHERN AVE #3, PHOENIX, AZ, 85021, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-68",
+                        "fname": "Sheraz",
+                        "lname": "Warraich",
+                        "company": "Nirvana Center",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7917 South 28th Way, PHOENIX, AZ, 85042, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-69",
+                        "fname": "CONOR",
+                        "lname": "ALAN COUNSELMAN",
+                        "company": "Nova Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1225 W MAIN ST #101-272, MESA, AZ, 85201, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-70",
+                        "fname": "ALEXANDER",
+                        "lname": "KEITH MIXON",
+                        "company": "Arizona Wellness Collective 3, Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1225 W MAIN ST #101-272, MESA, AZ, 85201, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-71",
+                        "fname": "MICHAEL",
+                        "lname": "ANTON",
+                        "company": "TruMed Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7508 E ARLINGTON RD, SCOTTSDALE, AZ, 85250, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-72",
+                        "fname": "RAMZI",
+                        "lname": "DUGUM",
+                        "company": "Az Compassionate Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5701 E INDIAN SCHOOL RD, PHOENIX, AZ, 85018, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-73",
+                        "fname": "ANDREW",
+                        "lname": "KEVELSON",
+                        "company": "AZ Flower Power LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7144 E STETSON DR, SUITE 300, SCOTTSDALE, AZ, 85251, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-74",
+                        "fname": "Edmond",
+                        "lname": "Vartughian",
+                        "company": "AZC1",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue,, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-75",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "AZCL1",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-76",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "4695 N Oracle Rd Ste 117, Tucson, AZ 85705",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-77",
+                        "fname": "GEORGE",
+                        "lname": "ARCHOS",
+                        "company": "Zen Leaf Chandler",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 IL. Address: 415 N. Dearborn St., 4th Floor, CHICAGO, IL, 60654, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-78",
+                        "fname": "Darren",
+                        "lname": "Weiss",
+                        "company": "AZGM 3, LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 IL. Address: 415 N. Dearborn St, 4th FL, CHICAGO, IL, 60654, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-79",
+                        "fname": "Usman",
+                        "lname": "Karriem",
+                        "company": "Black Labs, LLC",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: PO Box 3382, CHANDLER, AZ, 85224, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-80",
+                        "fname": "Michael",
+                        "lname": "Anton",
+                        "company": "Blue Palo Verde 1, LLC",
+                        "title": "Member and Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2937 W. Thomas Rd, PHOENIX, AZ, 85017, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-81",
+                        "fname": "Eivan",
+                        "lname": "Shahara",
+                        "company": "15235 North Dysart Road, 11D, El Mirage, AZ 85335",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5210 S. Priest Dr., GUADALUPE, AZ, 85283, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-82",
+                        "fname": "SCOTT",
+                        "lname": "VARGAS",
+                        "company": "Sticky Saguaro",
+                        "title": "Treasurer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 12338 E Riggs Rd, CHANDLER, AZ, 85249, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-83",
+                        "fname": "TODD",
+                        "lname": "VARGAS",
+                        "company": "Border Health, Inc",
+                        "title": "Secretary",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 12338 E Riggs Rd, CHANDLER, AZ, 85249, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-84",
+                        "fname": "Al",
+                        "lname": "Foreman",
+                        "company": "HANA MEDS",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3800 N. Central Avenue, Suite 460, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-85",
+                        "fname": "Sergey",
+                        "lname": "Sherman",
+                        "company": "Broken Arrow Herbal Center Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3800 N. Central Avenue, Suite 460, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-86",
+                        "fname": "Greta",
+                        "lname": "Brandt",
+                        "company": "The Flower Shop Az",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3131 E Camelback Rd Suite 211, PHOENIX, AZ, 85016, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-87",
+                        "fname": "Mike",
+                        "lname": "Standlee",
+                        "company": "Buds & Roses, Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3131 E Camelback Rd Suite 211, PHOENIX, AZ, 85016, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-88",
+                        "fname": "Kimberly",
+                        "lname": "Rivers",
+                        "company": "Trulieve of Scottsdale Dispensary",
+                        "title": "CEO (Chief Executive Officer)",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., Tallahassee, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-89",
+                        "fname": "Raymond",
+                        "lname": "Eric Powers",
+                        "company": "Byers Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., Tallahassee, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-90",
+                        "fname": "AARI",
+                        "lname": "C RUBEN",
+                        "company": "Releaf",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4426 E BLACKLIDGE DRIVE, TUCSON, AZ, 85712, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-91",
+                        "fname": "EDWIN",
+                        "lname": "GOMEZ",
+                        "company": "The Phoenix",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-92",
+                        "fname": "Jigarkumar",
+                        "lname": "Patel",
+                        "company": "Cannabis Research Group Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Ct, STE 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-93",
+                        "fname": "John",
+                        "lname": "Haugh",
+                        "company": "The Mint",
+                        "title": "Officer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 745 E. Missouri Ave, Suite 210, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-94",
+                        "fname": "Matthew",
+                        "lname": "S Darin",
+                        "company": "Catalina Hills Botanical Care",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 430 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-95",
+                        "fname": "Peter",
+                        "lname": "L Clateman",
+                        "company": "Catalina Hills Botanical Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2034, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            }
+            ];
+        }
+
+        // ── Filter ──────────────────────────────────────────────────────
+        function setFilter(f) {
+            currentFilter = f;
+            document.querySelectorAll('#filter-tabs .tab').forEach(t => {
+                t.classList.toggle('active', t.textContent === f);
+            });
+            renderAll();
+        }
+
+        // ── Render ──────────────────────────────────────────────────────
+        function renderAll() {
+            const statusMap = {
+                pending: { col: 'pending', label: 'Pending', statusClass: 'status-pending' },
+                approached: { col: 'approached', label: 'Approached', statusClass: 'status-approached' },
+                conversation: { col: 'conversation', label: 'In Conversation', statusClass: 'status-negotiating' },
+                sent: { col: 'sent', label: 'Sent ✓', statusClass: 'status-sent' }
+            };
+
+            ['pending','approached','conversation','sent'].forEach(col => {
+                document.getElementById(`body-${col}`).innerHTML = '';
+                document.getElementById(`count-${col}`).textContent = '0';
+            });
+
+            let filtered = CONTACTS;
+            if (currentFilter === 'Pending') filtered = CONTACTS.filter(c => c.status === 'pending');
+            else if (currentFilter === 'Approached') filtered = CONTACTS.filter(c => c.status === 'approached');
+            else if (currentFilter === 'Sent') filtered = CONTACTS.filter(c => c.status === 'sent');
+
+            const columnCounts = { pending: 0, approached: 0, conversation: 0, sent: 0 };
+
+            filtered.forEach(contact => {
+                const meta = statusMap[contact.status] || statusMap.pending;
+                const colBody = document.getElementById(`body-${meta.col}`);
+                if (!colBody) return;
+                columnCounts[meta.col]++;
+
+                const badgeClass = contact.status === 'sent' ? 'badge-sent' : contact.status === 'conversation' ? 'badge-hot' : contact.status === 'approached' ? 'badge-warm' : 'badge-new';
+                const badgeLabel = contact.status === 'sent' ? 'SENT' : contact.status === 'conversation' ? 'HOT' : contact.status === 'approached' ? 'WARM' : 'NEW';
+
+                const card = document.createElement('div');
+                card.className = 'lead-card' + (contact.status === 'sent' ? ' sent' : '');
+                card.onclick = () => openDrawer(CONTACTS.indexOf(contact));
+                card.innerHTML = `
+                    <div class="lead-badge ${badgeClass}" style="right: 50px;">${badgeLabel}</div><div class="lead-badge" style="background: rgba(255,255,255,0.05); color: var(--text-muted); right: 12px; font-size: 8px;">${contact.category || "General"}</div>
+                    <div class="lead-name">${contact.fname} ${contact.lname}</div>
+                    <div class="lead-company">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                        ${contact.company}
+                    </div>
+                    <div class="lead-meta">
+                        <div class="lead-status ${meta.statusClass}">
+                            <span class="lead-status-dot" style="background:${contact.status==='sent'?'var(--sent-green)':contact.status==='conversation'?'var(--onli-teal)':contact.status==='approached'?'#e5bf00':'var(--onli-blue)'}"></span>
+                            ${meta.label}
+                        </div>
+                        <div class="lead-time">${contact.title || ''}</div>
+                    </div>
+                `;
+                colBody.appendChild(card);
+            });
+
+            Object.entries(columnCounts).forEach(([col, count]) => {
+                document.getElementById(`count-${col}`).textContent = count;
+            });
+
+            // Update metrics (always total all contacts regardless of filter)
+            document.getElementById('metric-total').textContent = CONTACTS.length;
+            document.getElementById('metric-pending').textContent = CONTACTS.filter(c => c.status === 'pending').length;
+            document.getElementById('metric-approached').textContent = CONTACTS.filter(c => c.status === 'approached' || c.status === 'conversation').length;
+            document.getElementById('metric-sent').textContent = CONTACTS.filter(c => c.status === 'sent').length;
+        }
+
+        // ── Drawer ──────────────────────────────────────────────────────
+        function openDrawer(idx) {
+            currentIdx = idx;
+            const c = CONTACTS[idx];
+            if (!c) return;
+
+            document.getElementById('draft-container').style.display = 'none';
+            document.getElementById('draft-output').value = '';
+
+            document.getElementById('drw-name').textContent = `${c.fname} ${c.lname}`;
+            document.getElementById('drw-comp').textContent = c.company;
+            document.getElementById('drw-email').textContent = c.email || '—';
+            document.getElementById('drw-email').href = 'mailto:' + (c.email || '');
+            document.getElementById('drw-title').textContent = c.title || '—';
+            document.getElementById('drw-notes').textContent = c.notes || 'No notes yet.';
+
+            const tagColors = {
+                sent: 'background:rgba(57,255,20,0.12);color:var(--sent-green)',
+                conversation: 'background:rgba(255,51,85,0.1);color:#ff3355',
+                approached: 'background:rgba(229,191,0,0.1);color:#e5bf00',
+                pending: 'background:rgba(0,180,255,0.1);color:var(--onli-blue)'
+            };
+            const tagLabels = { sent: 'SENT ✓', conversation: 'IN CONVERSATION', approached: 'APPROACHED', pending: 'ONLI TARGET' };
+            document.getElementById('drw-tag').setAttribute('style', `display:inline-block;padding:4px 9px;border-radius:4px;font-size:10px;font-weight:700;margin-bottom:10px;letter-spacing:0.8px;${tagColors[c.status]||tagColors.pending}`);
+            document.getElementById('drw-tag').textContent = tagLabels[c.status] || 'ONLI TARGET';
+
+            document.getElementById('drawer').classList.add('open');
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer').classList.remove('open');
+        }
+
+        // ── Load Draft ──────────────────────────────────────────────────
+        function loadDraft() {
+            if (currentIdx < 0) return;
+            const c = CONTACTS[currentIdx];
+            const sel = document.getElementById('campaign-selector').value;
+            const tmpl = TEMPLATES[sel];
+            if (!tmpl) return;
+
+            const firstName = c.fname || 'there';
+            const company = c.company || 'your company';
+
+            const subject = tmpl.subject.replace(/{first_name}/g, firstName).replace(/{company}/g, company);
+            const body = tmpl.body.replace(/{first_name}/g, firstName).replace(/{company}/g, company);
+
+            document.getElementById('draft-output').value = `Subject: ${subject}\n\n${body}`;
+            document.getElementById('draft-container').style.display = 'flex';
+            document.getElementById('draft-container').style.flexDirection = 'column';
+        }
+
+        // ── Send Mail ───────────────────────────────────────────────────
+        function sendMailTo() {
+            if (currentIdx < 0) return;
+            const c = CONTACTS[currentIdx];
+            const text = document.getElementById('draft-output').value;
+
+            let subject = 'ONLI — Introduction';
+            let body = text;
+            const subjectMatch = text.match(/^Subject:\s*(.*)/i);
+            if (subjectMatch) {
+                subject = subjectMatch[1].trim();
+                body = text.replace(/^Subject:\s*.*\n*/i, '').trim();
+            }
+
+            const mailtoUrl = `mailto:${c.email || ''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+
+            // Auto-mark as approached if pending
+            if (c.status === 'pending') {
+                CONTACTS[currentIdx].status = 'approached';
+                saveToStorage();
+                renderAll();
+                showToast('✓ Opened in Mail App — marked as Approached', 'success');
+            } else {
+                showToast('✓ Opened in Mail App', 'info');
+            }
+        }
+
+        // ── Copy Draft ──────────────────────────────────────────────────
+        function copyDraft() {
+            const ta = document.getElementById('draft-output');
+            ta.select();
+            document.execCommand('copy');
+            const btn = document.querySelector('.btn-copy');
+            btn.textContent = 'COPIED!';
+            setTimeout(() => btn.textContent = 'COPY TEXT', 2000);
+        }
+
+        // ── Mark Approached ─────────────────────────────────────────────
+        function markApproached() {
+            if (currentIdx < 0) return;
+            const c = CONTACTS[currentIdx];
+            if (c.status === 'pending') {
+                CONTACTS[currentIdx].status = 'approached';
+                saveToStorage();
+                renderAll();
+                openDrawer(currentIdx); // refresh drawer tag
+                showToast('Marked as Approached', 'info');
+            }
+        }
+
+        // ── Add Contact Modal ───────────────────────────────────────────
+        function openAddModal() {
+            document.getElementById('add-modal').style.display = 'flex';
+            document.getElementById('inp-fname').focus();
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-modal').style.display = 'none';
+            ['inp-fname','inp-lname','inp-company','inp-title','inp-email','inp-notes'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('inp-status').value = 'pending';
+        }
+
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('add-modal')) closeAddModal();
+        }
+
+        function saveContact() {
+            const fname = document.getElementById('inp-fname').value.trim();
+            const lname = document.getElementById('inp-lname').value.trim();
+            const email = document.getElementById('inp-email').value.trim();
+
+            if (!fname || !email) {
+                showToast('First name and email are required.', 'error');
+                return;
+            }
+
+            const newContact = {
+                id: 'c' + Date.now(),
+                fname, lname,
+                company: document.getElementById('inp-company').value.trim(),
+                title: document.getElementById('inp-title').value.trim(),
+                email,
+                notes: document.getElementById('inp-notes').value.trim(),
+                status: document.getElementById('inp-status').value
+            };
+
+            CONTACTS.unshift(newContact);
+            saveToStorage();
+            renderAll();
+            closeAddModal();
+            showToast(`✓ ${fname} ${lname} added to campaign`, 'success');
+        }
+
+        // ── Toast ───────────────────────────────────────────────────────
+        function showToast(msg, type = 'info') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type}`;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 3500);
+        }
+
+        // ── Init ─────────────────────────────────────────────────────────
+        function init() {
+            const stored = loadFromStorage();
+            if (!stored) {
+                loadDefaultContacts();
+                saveToStorage();
+            }
+            renderAll();
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
