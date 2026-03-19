@@ -1014,33 +1014,1064 @@ ONLI | [your@email.com]`
         }
 
         // ── Default Seed Contacts ───────────────────────────────────────
-        function loadDefaultContacts() {
+                function loadDefaultContacts() {
             CONTACTS = [
                 {
-                    id: 'c1', fname: 'Sarah', lname: 'Chen', company: 'Apex Digital', title: 'VP of Marketing',
-                    email: 'sarah.chen@apexdigital.com', status: 'pending',
-                    notes: 'Runs paid marketing for a mid-market SaaS. Actively looking for outreach automation tools.'
-                },
-                {
-                    id: 'c2', fname: 'Marcus', lname: 'Rivera', company: 'BlueShift Media', title: 'Head of Growth',
-                    email: 'mrivera@blueshiftmedia.co', status: 'approached',
-                    notes: 'Responded positively to LinkedIn message. Follow up with platform demo.'
-                },
-                {
-                    id: 'c3', fname: 'Priya', lname: 'Nair', company: 'NovaTech Solutions', title: 'CMO',
-                    email: 'priya@novatechsolutions.io', status: 'conversation',
-                    notes: 'Had intro call Mar 14. Interested in enterprise plan. Needs stakeholder buy-in.'
-                },
-                {
-                    id: 'c4', fname: 'Jordan', lname: 'Walsh', company: 'Frontier Labs', title: 'Director of BizDev',
-                    email: 'jwalsh@frontierlabs.com', status: 'pending',
-                    notes: 'Former client from previous company. Warm intro potential.'
-                },
-                {
-                    id: 'c5', fname: 'Alexis', lname: 'Tran', company: 'Luminary Brand Co.', title: 'CEO',
-                    email: 'alexis@luminarybrand.com', status: 'sent',
-                    notes: 'Onboarded to ONLI Pro. Referral candidate.'
-                }
+                        "id": "azba-1",
+                        "fname": "Adam",
+                        "lname": "Christensen",
+                        "company": "Bell Bank",
+                        "title": "SVP, Commercial Banking Director",
+                        "email": "achristensen@bell.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-2",
+                        "fname": "Bernadette",
+                        "lname": "Hirsch",
+                        "company": "KS State Bank",
+                        "title": "SVP, Commercial Lending",
+                        "email": "bhirsch@ksstate.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-3",
+                        "fname": "John",
+                        "lname": "Fetherston",
+                        "company": "JPMorgan Chase",
+                        "title": "VP, State & Local Government Relations",
+                        "email": "john.fetherston@jpmchase.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-4",
+                        "fname": "Mary",
+                        "lname": "Noor",
+                        "company": "Bank of America",
+                        "title": "Phoenix Market Executive",
+                        "email": "mary.noor@bofa.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-5",
+                        "fname": "Michael",
+                        "lname": "Theile",
+                        "company": "First Fidelity Bank",
+                        "title": "EVP, AZ Commercial Lending",
+                        "email": "mtheile@ffb.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-6",
+                        "fname": "Brent",
+                        "lname": "Cannon",
+                        "company": "National Bank of Arizona",
+                        "title": "President",
+                        "email": "Brent.Cannon@nbarizona.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-7",
+                        "fname": "Daniel",
+                        "lname": "Del Monaco",
+                        "company": "Foothills Bank",
+                        "title": "Chief Banking Officer",
+                        "email": "Dan.DelMonaco@foothillsbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-8",
+                        "fname": "Harlan",
+                        "lname": "Levy",
+                        "company": "Wells Fargo",
+                        "title": "SVP, Government Relations",
+                        "email": "harlan.levy@wellsfargo.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-9",
+                        "fname": "Humphrey",
+                        "lname": "Shin",
+                        "company": "FirstBank",
+                        "title": "Market President",
+                        "email": "Humphrey.Shin@efirstbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-10",
+                        "fname": "Jim",
+                        "lname": "Marlerba",
+                        "company": "Integro Bank",
+                        "title": "Acting CEO",
+                        "email": "james.malerba@integro.bank",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-11",
+                        "fname": "Andy",
+                        "lname": "Gordon",
+                        "company": "Clearinghouse CDFI",
+                        "title": "AZ Market President",
+                        "email": "andyg@ccdfi.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-12",
+                        "fname": "Brian",
+                        "lname": "Crisp",
+                        "company": "Enterprise Bank & Trust",
+                        "title": "President, AZ Region",
+                        "email": "bcrisp@enterprisebank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-13",
+                        "fname": "Chris",
+                        "lname": "Wheeler",
+                        "company": "Goldwater Bank",
+                        "title": "SVP, Commercial Banking",
+                        "email": "cwheeler@goldwaterbank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-14",
+                        "fname": "David",
+                        "lname": "Bernard",
+                        "company": "Western Alliance Bank",
+                        "title": "Sr. Managing Director",
+                        "email": "dbernard@westernalliancebank.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-15",
+                        "fname": "Pete",
+                        "lname": "Tees",
+                        "company": "Southwest Heritage Bank",
+                        "title": "EVP & Chief Credit Officer",
+                        "email": "ptees@swhb.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "azba-16",
+                        "fname": "Sergio",
+                        "lname": "Cardenas",
+                        "company": "BOK Financial",
+                        "title": "SVP, Market Manager",
+                        "email": "sergio.cardenas@bokf.com",
+                        "notes": "AZ Banking Association member. Cannabis banking is a major pain point for their clients \u2014 ideal ONLI outreach target.",
+                        "status": "pending",
+                        "category": "banking"
+            },
+            {
+                        "id": "cannabis-co-16",
+                        "fname": "Karson",
+                        "lname": "Humiston",
+                        "company": "Vangst",
+                        "title": "",
+                        "email": "karson.humiston@vangst.com",
+                        "notes": "Cannabis industry company. Ph: Schedule a call at www.vangst.com/schedule-a-call",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-17",
+                        "fname": "Ryan",
+                        "lname": "Rosenfeld",
+                        "company": "GreenForce (acquired by Vangst)",
+                        "title": "",
+                        "email": "ryan.rosenfeld@vangst.com",
+                        "notes": "Cannabis industry company. Ph: Contact Vangst at www.vangst.com/schedule-a-call",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-18",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "CannaVape Supplies (Phoenix Vape Supply)",
+                        "title": "",
+                        "email": "phoenixvapesupply@gmail.com",
+                        "notes": "Cannabis industry company. Ph: (602) 682-7830 Addr: 626 W Indian School Rd, Phoenix, AZ 85013",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-19",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Supurb",
+                        "title": "",
+                        "email": "hello@gryphondigitalmining.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone number, contact via website form Addr: 1180 N. Town Center Drive, Suite 100, Las Vegas, NV 89144",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-20",
+                        "fname": "Michael",
+                        "lname": "Beedles",
+                        "company": "DataOwl",
+                        "title": "",
+                        "email": "info@alleaves.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone number, contact via form",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-21",
+                        "fname": "Michael",
+                        "lname": "Beedles",
+                        "company": "MJ Freeway (Akerna)",
+                        "title": "",
+                        "email": "info@alleaves.com",
+                        "notes": "Cannabis industry company. Ph: No direct phone, contact via form",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-22",
+                        "fname": "Artie",
+                        "lname": "Minson",
+                        "company": "LeafLink",
+                        "title": "",
+                        "email": "info@damafinancial.com",
+                        "notes": "Cannabis industry company. Ph: 877-401-3262",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-23",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Cova Software",
+                        "title": "",
+                        "email": "support@covasoftware.com",
+                        "notes": "Cannabis industry company. Ph: 1.844.667.2682",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-24",
+                        "fname": "Tabitha",
+                        "lname": "Hauer",
+                        "company": "Desert Valley Testing",
+                        "title": "",
+                        "email": "info@desertvalleytesting.com",
+                        "notes": "Cannabis industry company. Ph: (480) 788-6644 Addr: 51 W Weldon Ave, Phoenix, AZ 85013",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-25",
+                        "fname": "Cory",
+                        "lname": "Waggoner",
+                        "company": "Cannabis Consulting Group (Higher Yields Cannabis Consulting)",
+                        "title": "",
+                        "email": "info@higheryieldsconsulting.com",
+                        "notes": "Cannabis industry company. Ph: (844) 449-4353 Addr: 2590 Walnut St., Denver, CO 80205",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-26",
+                        "fname": "Jennifer",
+                        "lname": "and Gordon Ogden",
+                        "company": "Plant.Body.Soul.",
+                        "title": "",
+                        "email": "HELLO@PLANTBODYSOUL.COM",
+                        "notes": "Cannabis industry company. Ph: 855.768.5420 Addr: 335 East Palm Lane, Phoenix, AZ 85004",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-27",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Kiterocket",
+                        "title": "",
+                        "email": "hellophx@kiterocket.com",
+                        "notes": "Cannabis industry company. Ph: +1 602-443-0030",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-28",
+                        "fname": "Nick",
+                        "lname": "Kovacevich",
+                        "company": "Kush Bottles (KushCo Holdings)",
+                        "title": "",
+                        "email": "customerservice@kushsupplyco.com",
+                        "notes": "Cannabis industry company. Ph: (888) 920-5874",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-29",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Green Rush Packaging",
+                        "title": "",
+                        "email": "sales@greenrushpackaging.com",
+                        "notes": "Cannabis industry company. Ph: (866) 477-7225",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-30",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "420 Packaging",
+                        "title": "",
+                        "email": "customerservice@420packaging.com",
+                        "notes": "Cannabis industry company. Ph: 775-376-1945",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-31",
+                        "fname": "Gordon",
+                        "lname": "Ogden",
+                        "company": "Plant.Body.Soul.",
+                        "title": "",
+                        "email": "HELLO@PLANTBODYSOUL.COM",
+                        "notes": "Cannabis industry company. Ph: 855-768-5420 Addr: 335 East Palm Lane, Phoenix, AZ 85004",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-32",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Green Mile Logistics",
+                        "title": "",
+                        "email": "sales@greenmilelogistics.com",
+                        "notes": "Cannabis industry company.",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-33",
+                        "fname": "Brittany",
+                        "lname": "Le",
+                        "company": "Canna Security America",
+                        "title": "",
+                        "email": "info@cannasecurityamerica.com",
+                        "notes": "Cannabis industry company. Ph: (720) 900-0000",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-34",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "PayQwick",
+                        "title": "",
+                        "email": "customersupport@payqwick.com",
+                        "notes": "Cannabis industry company. Ph: 1-888-729-7942",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "cannabis-co-35",
+                        "fname": "Contact",
+                        "lname": "",
+                        "company": "Cannasure Insurance",
+                        "title": "",
+                        "email": "info@cannasure.com",
+                        "notes": "Cannabis industry company. Ph: (800) 420-5757 Addr: 1468 W. 9th St., Ste. 805, Cleveland, OH 44113",
+                        "status": "pending",
+                        "category": "cannabis"
+            },
+            {
+                        "id": "matrix-36",
+                        "fname": "L.",
+                        "lname": "Philipp Wall",
+                        "company": "The Green Leef",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 6617 E. Cactus Wren Road, PARADISE VLY, AZ, 85253, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-37",
+                        "fname": "NICHOLAS",
+                        "lname": "VITA",
+                        "company": "SWC Prescott",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 MA. Address: 321 Billerica Road, Suite 204, CHELMSFORD, MA, 01824, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-38",
+                        "fname": "EIVAN",
+                        "lname": "SHAHARA",
+                        "company": "The Mint Dispensary",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4245 W THOMAS RD #100, PHOENIX, AZ, 85019, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-39",
+                        "fname": "REVAN",
+                        "lname": "SHAHARA",
+                        "company": "4245 Investments Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4245 W THOMAS RD #100, PHOENIX, AZ, 85019, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-40",
+                        "fname": "MOHIT",
+                        "lname": "ASNANI",
+                        "company": "D2 Dispensary",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 221 E 6TH ST. SUITE 105, TUCSON, AZ, 85705, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-41",
+                        "fname": "CHARLES",
+                        "lname": "BOYDEN",
+                        "company": "46 Wellness Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AA. Address: 221 E 6TH ST. SUITE 105, TUCSON, AA, 85705, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-42",
+                        "fname": "Jeremy",
+                        "lname": "Basha",
+                        "company": "480 License Holdings, LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2055 E. 5th St., Suite 201, TEMPE, AZ, 85281, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-43",
+                        "fname": "CYNTHIA",
+                        "lname": "SAY",
+                        "company": "Health For Life Cave Creek",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 21035 NORTH CAVE CREEK ROAD, SUITES C-3 AND C-4, PHOENIX, AZ, 85024, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-44",
+                        "fname": "RICHARD",
+                        "lname": "PROUD",
+                        "company": "Abaca Inc.",
+                        "title": "President/CEO",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 21035 NORTH CAVE CREEK ROAD, SUITES C-3 AND C-4, PHOENIX, AZ, 85024, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-45",
+                        "fname": "RICHARD",
+                        "lname": "PROUD",
+                        "company": "21035 N Cave Creek Rd Ste 3 & 4, Phoenix, AZ 85024",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 . Address: . No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-46",
+                        "fname": "Kimberly",
+                        "lname": "Rivers",
+                        "company": "Trulieve of Tatum",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., TALLAHASSEE, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-47",
+                        "fname": "Raymond",
+                        "lname": "Eric Powers",
+                        "company": "Abedon Saiz Llc",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., TALLAHASSEE, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-48",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "Absolute Health Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-49",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "Absolute Health Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-50",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "175 S Hamilton Pl Bldg 4 Ste 110, Gilbert, AZ 85233",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-51",
+                        "fname": "THANH",
+                        "lname": "PHAM",
+                        "company": "AGI Management LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 540 N Jasmine Way, LITCHFIELD PARK, AZ, 85340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-52",
+                        "fname": "THANH",
+                        "lname": "PHAM",
+                        "company": "All Greens Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 540 JASMINE WAY, LITCHFIELD PARK, AZ, 85340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-53",
+                        "fname": "MYNGA",
+                        "lname": "TRAN",
+                        "company": "10032 W Bell Rd Ste 100, Sun City, AZ 85351",
+                        "title": "Officer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 902 W HARWELL RD, PHOENIX, AZ, 85041, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-54",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "All Rebel Rockers Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave, Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-55",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "All Rebel Rockers Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-56",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "4730 S 48th St, Phoenix, AZ 85040",
+                        "title": "Vice-President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-57",
+                        "fname": "John",
+                        "lname": "Campbell",
+                        "company": "Apache County Dispensary LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 ID. Address: PO Box 4944, KETCHUM, ID, 83340, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-58",
+                        "fname": "Ian",
+                        "lname": "Lev - Sole Manager",
+                        "company": "Apollo Labs",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1846 E Innovation Park Dr. STE 100, ORO VALLEY, AZ, 85755, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-59",
+                        "fname": "Genalyn",
+                        "lname": "Duka",
+                        "company": "Arizona Cannabis Society Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 15889 W. Westview Dr, GOODYEAR, AZ, 85395, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-60",
+                        "fname": "PRADIP",
+                        "lname": "PATEL",
+                        "company": "Arizona Golden Leaf Wellness, Llc",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 9780 N CAMINO DEL PLATA, TUCSON, AZ, 85742, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-61",
+                        "fname": "Edwin",
+                        "lname": "Gomez",
+                        "company": "Nature's Medicines",
+                        "title": "Secretary",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-62",
+                        "fname": "Jigarkumar",
+                        "lname": "Patel",
+                        "company": "Arizona Natural Pain Solutions I",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-63",
+                        "fname": "EDMOND",
+                        "lname": "VARTUGHIAN",
+                        "company": "Arizona Natures Wellness",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-64",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "Arizona Natures Wellness",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-65",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "465 Jordan Rd, Sedona, AZ 86336",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-66",
+                        "fname": "MARK",
+                        "lname": "MYER",
+                        "company": "Arizona Organix",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5301 W. GLENDALE AVE., GLENDALE, AZ, 85301, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-67",
+                        "fname": "WILLIAM",
+                        "lname": "BENJAMIN MYER",
+                        "company": "5303 W Glendale Ave, Glendale, AZ 85301",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2 W. NORTHERN AVE #3, PHOENIX, AZ, 85021, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-68",
+                        "fname": "Sheraz",
+                        "lname": "Warraich",
+                        "company": "Nirvana Center",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7917 South 28th Way, PHOENIX, AZ, 85042, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-69",
+                        "fname": "CONOR",
+                        "lname": "ALAN COUNSELMAN",
+                        "company": "Nova Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1225 W MAIN ST #101-272, MESA, AZ, 85201, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-70",
+                        "fname": "ALEXANDER",
+                        "lname": "KEITH MIXON",
+                        "company": "Arizona Wellness Collective 3, Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 1225 W MAIN ST #101-272, MESA, AZ, 85201, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-71",
+                        "fname": "MICHAEL",
+                        "lname": "ANTON",
+                        "company": "TruMed Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7508 E ARLINGTON RD, SCOTTSDALE, AZ, 85250, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-72",
+                        "fname": "RAMZI",
+                        "lname": "DUGUM",
+                        "company": "Az Compassionate Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5701 E INDIAN SCHOOL RD, PHOENIX, AZ, 85018, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-73",
+                        "fname": "ANDREW",
+                        "lname": "KEVELSON",
+                        "company": "AZ Flower Power LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 7144 E STETSON DR, SUITE 300, SCOTTSDALE, AZ, 85251, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-74",
+                        "fname": "Edmond",
+                        "lname": "Vartughian",
+                        "company": "AZC1",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue,, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-75",
+                        "fname": "Matthew",
+                        "lname": "Darin",
+                        "company": "AZCL1",
+                        "title": "President",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave, Suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-76",
+                        "fname": "Peter",
+                        "lname": "Clateman",
+                        "company": "4695 N Oracle Rd Ste 117, Tucson, AZ 85705",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Avenue, suite 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-77",
+                        "fname": "GEORGE",
+                        "lname": "ARCHOS",
+                        "company": "Zen Leaf Chandler",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 IL. Address: 415 N. Dearborn St., 4th Floor, CHICAGO, IL, 60654, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-78",
+                        "fname": "Darren",
+                        "lname": "Weiss",
+                        "company": "AZGM 3, LLC",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 IL. Address: 415 N. Dearborn St, 4th FL, CHICAGO, IL, 60654, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-79",
+                        "fname": "Usman",
+                        "lname": "Karriem",
+                        "company": "Black Labs, LLC",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: PO Box 3382, CHANDLER, AZ, 85224, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-80",
+                        "fname": "Michael",
+                        "lname": "Anton",
+                        "company": "Blue Palo Verde 1, LLC",
+                        "title": "Member and Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 2937 W. Thomas Rd, PHOENIX, AZ, 85017, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-81",
+                        "fname": "Eivan",
+                        "lname": "Shahara",
+                        "company": "15235 North Dysart Road, 11D, El Mirage, AZ 85335",
+                        "title": "Member",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 5210 S. Priest Dr., GUADALUPE, AZ, 85283, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-82",
+                        "fname": "SCOTT",
+                        "lname": "VARGAS",
+                        "company": "Sticky Saguaro",
+                        "title": "Treasurer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 12338 E Riggs Rd, CHANDLER, AZ, 85249, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-83",
+                        "fname": "TODD",
+                        "lname": "VARGAS",
+                        "company": "Border Health, Inc",
+                        "title": "Secretary",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 12338 E Riggs Rd, CHANDLER, AZ, 85249, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-84",
+                        "fname": "Al",
+                        "lname": "Foreman",
+                        "company": "HANA MEDS",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3800 N. Central Avenue, Suite 460, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-85",
+                        "fname": "Sergey",
+                        "lname": "Sherman",
+                        "company": "Broken Arrow Herbal Center Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3800 N. Central Avenue, Suite 460, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-86",
+                        "fname": "Greta",
+                        "lname": "Brandt",
+                        "company": "The Flower Shop Az",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3131 E Camelback Rd Suite 211, PHOENIX, AZ, 85016, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-87",
+                        "fname": "Mike",
+                        "lname": "Standlee",
+                        "company": "Buds & Roses, Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 3131 E Camelback Rd Suite 211, PHOENIX, AZ, 85016, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-88",
+                        "fname": "Kimberly",
+                        "lname": "Rivers",
+                        "company": "Trulieve of Scottsdale Dispensary",
+                        "title": "CEO (Chief Executive Officer)",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., Tallahassee, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-89",
+                        "fname": "Raymond",
+                        "lname": "Eric Powers",
+                        "company": "Byers Dispensary",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 FL. Address: 3494 Martin Hurst Rd., Tallahassee, FL, 32312, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-90",
+                        "fname": "AARI",
+                        "lname": "C RUBEN",
+                        "company": "Releaf",
+                        "title": "Manager",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 4426 E BLACKLIDGE DRIVE, TUCSON, AZ, 85712, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-91",
+                        "fname": "EDWIN",
+                        "lname": "GOMEZ",
+                        "company": "The Phoenix",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Court, Ste. 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-92",
+                        "fname": "Jigarkumar",
+                        "lname": "Patel",
+                        "company": "Cannabis Research Group Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 690 North Cofco Center Ct, STE 230, PHOENIX, AZ, 85008, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-93",
+                        "fname": "John",
+                        "lname": "Haugh",
+                        "company": "The Mint",
+                        "title": "Officer",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 AZ. Address: 745 E. Missouri Ave, Suite 210, PHOENIX, AZ, 85012, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-94",
+                        "fname": "Matthew",
+                        "lname": "S Darin",
+                        "company": "Catalina Hills Botanical Care",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 430 Lexington Ave Ste 2035, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            },
+            {
+                        "id": "matrix-95",
+                        "fname": "Peter",
+                        "lname": "L Clateman",
+                        "company": "Catalina Hills Botanical Care Inc",
+                        "title": "Director",
+                        "email": "",
+                        "notes": "AZ Cannabis Dispensary \u2014 NY. Address: 420 Lexington Ave Ste 2034, NEW YORK, NY, 10170, USA. No email on file \u2014 research needed.",
+                        "status": "pending",
+                        "category": "cannabis-dispensary"
+            }
             ];
         }
 
@@ -1087,7 +2118,7 @@ ONLI | [your@email.com]`
                 card.className = 'lead-card' + (contact.status === 'sent' ? ' sent' : '');
                 card.onclick = () => openDrawer(CONTACTS.indexOf(contact));
                 card.innerHTML = `
-                    <div class="lead-badge ${badgeClass}">${badgeLabel}</div>
+                    <div class="lead-badge ${badgeClass}" style="right: 50px;">${badgeLabel}</div><div class="lead-badge" style="background: rgba(255,255,255,0.05); color: var(--text-muted); right: 12px; font-size: 8px;">${contact.category || "General"}</div>
                     <div class="lead-name">${contact.fname} ${contact.lname}</div>
                     <div class="lead-company">
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
